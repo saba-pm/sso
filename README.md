@@ -39,3 +39,13 @@ Create a dedicated namespace for the SSO components. Run the following command t
 
 ```bash
 kubectl create namespace sso
+
+
+### 5.Install the Helm Chart
+
+helm install -n sso sso ./sso
+
+### Reference
+For more information, you can refer to the : https://ssoready.com/docs/self-hosting-ssoready .
+
+

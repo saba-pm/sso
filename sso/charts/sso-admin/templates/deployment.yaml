@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sso-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sso-admin
+  template:
+    metadata:
+      labels:
+        app: sso-admin
+    spec:
+      containers:
+      - name: sso-admin
+        image:  "{{ .Values.dockerImage }}"
+        ports:
+        - containerPort: 80
+        env:
+        - name: ADMIN_SERVE_PORT
+          value: "{{ .Values.ADMIN_SERVE_PORT }}"
+        - name: ADMIN_API_URL
+          value: "{{ .Values.ADMIN_API_URL }}"

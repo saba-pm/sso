@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sso-migrate
+spec:
+  template:
+    spec:
+      containers:
+      - name: migrate
+        image: ssoready/ssoready-migrate:main
+        args: ["-d", ""postgres://postgres:password@postgres/postgres"", "up"]
+      restartPolicy: OnFailure

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sso-admin-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+    #nginx.ingress.kubernetes.io/enable-cors: 'true'
+    nginx.ingress.kubernetes.io/proxy-body-size: 800m
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '9600'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '9600'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt  
+spec:
+  rules:
+  - host: sso-admin.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-svc
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - sso-admin.example.com
+    secretName:  sso-admin.example.com-tls

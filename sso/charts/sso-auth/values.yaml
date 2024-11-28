@@ -1,0 +1,8 @@
+AUTH_SERVE_ADDR: ":80"
+      # Have this point at ssoready-db. In this example, that's the `postgres` docker-compose service above.
+AUTH_DB: "postgres://postgres:password@postgres/postgres"
+      # Have this point at where this service will be accessible from the public internet.
+AUTH_BASE_URL: "http://localhost:8080"
+      # See "SAML State Signing Key" below. For initial testing, this default value is fine.
+AUTH_SAML_STATE_SIGNING_KEY: "0000000000000000000000000000000000000000000000000000000000000000"
+   

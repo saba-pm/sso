@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sso-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sso-auth
+  template:
+    metadata:
+      labels:
+        app: sso-auth
+    spec:
+      containers:
+      - name: sso-auth
+        image:  "{{ .Values.dockerImage }}"
+        ports:
+        - containerPort: 80
+        env:
+        - name: AUTH_SERVE_ADDR
+          value: "{{ .Values.AUTH_SERVE_ADDR }}"
+        - name: AUTH_BASE_URL
+          value: "{{ .Values.AUTH_BASE_URL }}"
+        - name: "AUTH_DB"
+          valueFrom:
+            secretKeyRef:
+              key: AUTH_DB
+              name: sso-secret
+        - name: "AUTH_SAML_STATE_SIGNING_KEY"
+          valueFrom:
+            secretKeyRef:
+              key: AUTH_SAML_STATE_SIGNING_KEY
+              name: sso-secret              

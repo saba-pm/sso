@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc
+spec:
+  selector:
+    app: sso-app
+  ports:
+    - name: tcp
+      protocol: TCP
+      port: {{ .Values.APP_SERVE_PORT }}
+      targetPort: {{ .Values.APP_SERVE_PORT }}      

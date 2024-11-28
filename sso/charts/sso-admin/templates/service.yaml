@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-svc
+spec:
+  selector:
+    app:  sso-admin
+  ports:
+    - name: tcp
+      protocol: TCP
+      port: {{ .Values.ADMIN_SERVE_PORT }}
+      targetPort: {{ .Values.ADMIN_SERVE_PORT }}

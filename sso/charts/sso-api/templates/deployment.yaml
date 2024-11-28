@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sso-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sso-api
+  template:
+    metadata:
+      labels:
+        app: sso-api
+    spec:
+      containers:
+      - name: sso-api
+        image:  "{{ .Values.dockerImage }}"
+        ports:
+        - containerPort: 80
+        env:
+        - name: API_DEFAULT_ADMIN_SETUP_URL
+          value: "{{ .Values.API_DEFAULT_ADMIN_SETUP_URL }}"        
+        - name: API_DEFAULT_AUTH_URL
+          value: "{{ .Values.API_DEFAULT_AUTH_URL }}"
+        - name: API_SERVE_ADDR
+          value: "{{ .Values.API_SERVE_ADDR }}"          
+        - name: AUTH_BASE_URL
+          value: "{{ .Values.AUTH_BASE_URL }}"      
+        - name: "API_DB"
+          valueFrom:
+            secretKeyRef:
+              key: AUTH_DB
+              name: sso-secret
+        - name: "API_SAML_STATE_SIGNING_KEY"
+          valueFrom:
+            secretKeyRef:
+              key: AUTH_SAML_STATE_SIGNING_KEY
+              name: sso-secret              
+        - name: "API_GOOGLE_OAUTH_CLIENT_ID"
+          valueFrom:
+            secretKeyRef:
+              key: API_GOOGLE_OAUTH_CLIENT_ID
+              name: sso-secret              

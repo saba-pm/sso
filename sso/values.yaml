@@ -1,0 +1,37 @@
+sso-auth:
+  enabled: true
+  dockerImage: ssoready/ssoready-auth:sha-18090f8
+  AUTH_SERVE_ADDR: ":80"
+  AUTH_BASE_URL: "https://sso-auth.example.com"
+  SSO_PORT: "80"
+
+sso-api:
+  enabled: true
+  dockerImage: ssoready/ssoready-api:sha-18090f8
+  API_SERVE_ADDR: ":80"
+  API_DEFAULT_AUTH_URL: "https://sso-auth.example.com"
+  API_DEFAULT_ADMIN_SETUP_URL: "https://sso-admin.example.com/setup"
+  AUTH_BASE_URL: "auth.sso.svc.cluster.local"
+  SSO_PORT: "80"
+
+sso-app:
+  enabled: true
+  dockerImage: ssoready/ssoready-app:sha-18090f8
+  APP_SERVE_PORT: "80"
+  APP_APP_URL: "https://sso-app.example.com"
+  APP_PUBLIC_API_URL: "https://sso-api.example.com"
+  APP_API_URL: "https://sso-api.example.com/internal/connect"
+
+sso-admin:
+  enabled: true
+  dockerImage: ssoready/ssoready-admin:sha-18090f8
+  ADMIN_SERVE_PORT: "80"
+  ADMIN_API_URL: "https://sso-api.example.com/internal/connect"
+
+Secret:
+  AUTH_SAML_STATE_SIGNING_KEY: "0000000000000000000000000000000000000000000000000000000000000000"
+  AUTH_DB : "postgres://postgres:password@postgres/postgres"
+  POSTGRES_PASSWORD : "123"
+  APP_GOOGLE_OAUTH_CLIENT_ID: "171906208332-m8dg2p6av2f0aa7lliaj6oo0grct57p1.apps.googleusercontent.com"
+  API_GOOGLE_OAUTH_CLIENT_ID: "171906208332-m8dg2p6av2f0aa7lliaj6oo0grct57p1.apps.googleusercontent.com"
+

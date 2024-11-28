@@ -1,0 +1,14 @@
+API_SERVE_ADDR: ":80"
+      # Have this point at ssoready-db. In this example, that's the `postgres` docker-compose service above.
+API_DB: "postgres://postgres:password@postgres/postgres"
+      # Have this point at where the ssoready-auth service will be accessible from the public internet.
+API_DEFAULT_AUTH_URL: "http://localhost:8080"
+      # (Optional -- skip if you're not using ssoready-admin)
+      #
+      # Have this point at where the ssoready-admin service will be accessible from the public internet, followed by "/setup".
+API_DEFAULT_ADMIN_SETUP_URL: "http://localhost:8083/setup"
+      # See "Supporting Login Methods" below.
+API_GOOGLE_OAUTH_CLIENT_ID: "171906208332-m8dg2p6av2f0aa7lliaj6oo0grct57p1.apps.googleusercontent.com"
+      # See "SAML State Signing Key" below. For initial testing, this default value is fine.
+API_SAML_STATE_SIGNING_KEY: "0000000000000000000000000000000000000000000000000000000000000000"
+  

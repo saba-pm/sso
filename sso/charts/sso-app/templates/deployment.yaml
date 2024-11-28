@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sso-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sso-app
+  template:
+    metadata:
+      labels:
+        app: sso-app
+    spec:
+      containers:
+      - name: sso-app
+        image:  "{{ .Values.dockerImage }}"
+        ports:
+        - containerPort: 80
+        env:
+        - name: APP_SERVE_PORT
+          value: "{{ .Values.APP_SERVE_PORT }}"
+        - name: APP_APP_URL
+          value: "{{ .Values.APP_APP_URL }}"
+        - name: APP_PUBLIC_API_URL
+          value: "{{ .Values.APP_PUBLIC_API_URL }}"
+        - name: APP_API_URL
+          value: "{{ .Values.APP_API_URL }}"
+        - name: "APP_GOOGLE_OAUTH_CLIENT_ID"
+          valueFrom:
+            secretKeyRef:
+              key: APP_GOOGLE_OAUTH_CLIENT_ID
+              name: sso-secret      

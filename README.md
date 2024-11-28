@@ -1,1 +1,1 @@
-# sso
+Self-Hosting SSOReady on Kubernetes

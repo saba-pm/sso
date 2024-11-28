@@ -8,6 +8,8 @@ This guide outlines the steps to deploy **SSOReady** on your Kubernetes cluster.
 - Helm 3+ installed.
 - Kubernetes 1.18+.
 - The domain name for accessing the SSO services.
+- letsencrypt
+- nginx
 
 ## Steps to Deploy
 
